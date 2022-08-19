@@ -12,8 +12,8 @@ elif [ "${DRIVER}" = "snd-usb-audio" ]; then
 		name="$(printf "uca222_%s" "${num}")"
 		kill -9 $(ps auxwww | grep -v grep | grep zita | grep "hw:${name}" | awk '{print $2}') || true
 		printf "%s" "${name}"
-	elif [ "${PRODUCT}" = "1235/8200/41b" ]; then
-		name="scarlett2i4"
+	elif [ "${PRODUCT}" = "19f7/3/100" ]; then
+		name="rodentusb"
 		kill -9 $(ps auxwww | grep -v grep | grep zita | grep "hw:${name}" | awk '{print $2}') || true
 		printf "%s" "${name}"
 	elif [ "${PRODUCT}" = "a12/bc/1004" ]; then
