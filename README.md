@@ -30,5 +30,5 @@ The system uses some publicly availible software to be able to run correctly:
 # Inspiration
 This project was inspired by:
 
-- [Jackie](https://github.com/lukas2511/jackie) by [lukas2511]
+- [Jackie](https://github.com/lukas2511/jackie) by [lukas2511](https://github.com/lukas2511)
 - [jack_mixer](https://github.com/jack-mixer/jack_mixer)
