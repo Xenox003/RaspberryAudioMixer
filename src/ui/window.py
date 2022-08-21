@@ -5,7 +5,7 @@ import random
 gi.require_version("Gtk","3.0")
 from gi.repository import Gtk, Gdk, GLib
 
-import meter
+from .meter import MonoMeter
 
 class MainWindow(Gtk.Window):
     def __init__(self):
@@ -17,21 +17,16 @@ class MainWindow(Gtk.Window):
         self.head_bar.props.title = "Raspberry Audio Mixer"
         self.set_titlebar(self.head_bar)
         
-        self.button_container = Gtk.Box()
         self.page_container = Gtk.Stack()
+        self.button_container = Gtk.Box()
         
-        button_container = Gtk.Box()
+        self.page_buttons = []
+        self.pages = []
         
-        button = Gtk.Button()
-        button.set_label("Test")
+        self.add_page("mixer","Mixer")
         
-        button2 = Gtk.Button()
-        button2.set_label("Test2")
-        
-        button_container.add(button)
-        button_container.add(button2)
-        
-        self.head_bar.pack_start(button_container)
+        self.head_bar.pack_start(self.button_container)
+        self.add(self.page_container)
         
         
         """
@@ -70,10 +65,31 @@ class MainWindow(Gtk.Window):
         GLib.timeout_add(33,test,meter2)
         GLib.timeout_add(33,test,meter3)
         """
+         
+    def handle_page_button_click(self,button):
+        name = button.get_name()
+        name = name[:-4]
+        self.page_container.set_visible_child_name(name)
+         
+    def add_page(self,name,label):
+        page_button = Gtk.Button()
+        page_button.set_name("page-" + name + "-btn")
+        page_button.set_label(label)
         
-    def add_page(self,name):
-        button = Gtk.Button()
-        button.set_label(name)
+        page_button.connect("clicked",self.handle_page_button_click)
+        
+        self.page_buttons.append(page_button)
+        self.button_container.add(page_button)
+        
+        page = Gtk.Box()
+        page.set_name("page-" + name)
+        page.set_visible(True)
+        
+        self.pages.append(page)
+        self.page_container.add_named(page,"page-" + name)
+        
+        return page
+            
         
         
         

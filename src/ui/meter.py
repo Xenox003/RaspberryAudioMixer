@@ -3,8 +3,6 @@ import cairo
 import time
 from random import randint
 
-import window
-
 gi.require_version("Gtk","3.0")
 from gi.repository import Gtk, Gdk
 
@@ -79,8 +77,3 @@ class MonoMeter(Meter):
         self.value = value
         self.re_draw()
             
-        
-        
-        
-if __name__ == '__main__':
-    window.init()
