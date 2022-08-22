@@ -15,7 +15,7 @@ from .channel import Channel
 class MainWindow(Gtk.Window):
     def __init__(self):
         super().__init__()
-        self.set_default_size(800,480)
+        self.set_default_size(800,340)
         
         self.page_container = Gtk.Stack()
         self.button_container = Gtk.Box()
@@ -29,9 +29,12 @@ class MainWindow(Gtk.Window):
         #meter1.set_size_request(50,100)
         #GLib.timeout_add(33,test,meter1)
         
-        channel1 = Channel(name="Test")
-        
+        channel1 = Channel(name="Test",stereo=True)
         mixer_page.add(channel1)
+        channel2 = Channel(name="Test2",stereo=True)
+        mixer_page.add(channel2)
+        channel3 = Channel(name="Test3",stereo=True)
+        mixer_page.add(channel3)
         
         devices_page = self.add_page("devices","Devices",Gtk.Button(label="Test"))
         settings_page = self.add_page("settings","System Settings")
@@ -117,6 +120,11 @@ class MainWindow(Gtk.Window):
         
 
 def init():
+    
+    settings = Gtk.Settings.get_default()
+    settings.set_property("gtk-theme-name", "Adwaita-dark")
+    settings.set_property("gtk-application-prefer-dark-theme", True)
+    
     mainWindow = MainWindow()
     mainWindow.connect("destroy",Gtk.main_quit)
     mainWindow.show_all()
