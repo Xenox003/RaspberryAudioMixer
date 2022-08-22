@@ -5,17 +5,17 @@ import random
 gi.require_version("Gtk","3.0")
 from gi.repository import Gtk, Gdk, GLib
 
+from .header_bar import HeaderBar
+
 from .meter import MonoMeter
+from .meter import StereoMeter
+
+from .channel import Channel
 
 class MainWindow(Gtk.Window):
     def __init__(self):
         super().__init__()
         self.set_default_size(800,480)
-        
-        self.head_bar = Gtk.HeaderBar()
-        self.head_bar.set_show_close_button(True)
-        self.head_bar.props.title = "Raspberry Audio Mixer"
-        self.set_titlebar(self.head_bar)
         
         self.page_container = Gtk.Stack()
         self.button_container = Gtk.Box()
@@ -23,11 +23,29 @@ class MainWindow(Gtk.Window):
         self.page_buttons = []
         self.pages = []
         
-        self.add_page("mixer","Mixer")
         
+        mixer_page = self.add_page("mixer","Mixer")
+        #meter1 = StereoMeter()
+        #meter1.set_size_request(50,100)
+        #GLib.timeout_add(33,test,meter1)
+        
+        channel1 = Channel(name="Test")
+        
+        mixer_page.add(channel1)
+        
+        devices_page = self.add_page("devices","Devices",Gtk.Button(label="Test"))
+        settings_page = self.add_page("settings","System Settings")
+        
+        # Create box for Custom Header Bar in Fullscreen
+        # (Header bar gets added to box in fullscreen mode so it's still accessable)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        box.add(self.page_container)
+        self.add(box)
+        
+        # Custom Header Bar Implementation
+        self.head_bar = HeaderBar(self,title="Raspberry Audio Mixer")
         self.head_bar.pack_start(self.button_container)
-        self.add(self.page_container)
-        
+        self.set_titlebar(self.head_bar)
         
         """
         self.hbox_main = Gtk.HBox()
@@ -67,11 +85,12 @@ class MainWindow(Gtk.Window):
         """
          
     def handle_page_button_click(self,button):
-        name = button.get_name()
-        name = name[:-4]
-        self.page_container.set_visible_child_name(name)
+        button_name = button.get_name()
+        page_name = button_name[:-4]
+        self.page_container.set_visible_child_name(page_name)
+        
          
-    def add_page(self,name,label):
+    def add_page(self,name,label,page_widget=None):
         page_button = Gtk.Button()
         page_button.set_name("page-" + name + "-btn")
         page_button.set_label(label)
@@ -81,7 +100,10 @@ class MainWindow(Gtk.Window):
         self.page_buttons.append(page_button)
         self.button_container.add(page_button)
         
-        page = Gtk.Box()
+        if page_widget:
+            page = page_widget
+        else:
+            page = Gtk.Box() 
         page.set_name("page-" + name)
         page.set_visible(True)
         
@@ -106,15 +128,15 @@ switcher = True
 def test(meter):
     global switcher
     
-    if meter.value >= 1 and switcher == True:
+    if meter.l_value >= 1 and switcher == True:
         switcher = False
-    elif meter.value <= 0 and switcher == False:
+    elif meter.l_value <= 0 and switcher == False:
         switcher = True
         
     if switcher:
-        meter.set_value(meter.value + 0.05)
+        meter.set_values(meter.l_value + 0.05,meter.r_value + 0.05)
     else:
-        meter.set_value(meter.value - 0.05)
+        meter.set_values(meter.l_value - 0.05,meter.r_value - 0.05)
     
     return True
     

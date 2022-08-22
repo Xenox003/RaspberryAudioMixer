@@ -68,12 +68,34 @@ class MonoMeter(Meter):
     def draw(self,widget,cairo_ctx):
         self.draw_background(cairo_ctx)
         
-        width = 20
+        width = self.width / 4
         x = (self.width - width) / 2
         
         self.draw_value(cairo_ctx,self.value,x,width)
         
     def set_value(self,value):
         self.value = value
+        self.re_draw()
+        
+class StereoMeter(Meter):
+    def __init__(self):
+        super().__init__()
+        
+        self.l_value = 0.0
+        self.r_value = 0.0
+        
+    def draw(self,widget,cairo_ctx):
+        self.draw_background(cairo_ctx)
+        
+        width = self.width / 5
+        l_x = width
+        r_x = width * 3
+        
+        self.draw_value(cairo_ctx,self.l_value,l_x,width)
+        self.draw_value(cairo_ctx,self.r_value,r_x,width)
+        
+    def set_values(self,left,right):
+        self.l_value = left
+        self.r_value = right
         self.re_draw()
             
