@@ -32,3 +32,7 @@ This project was inspired by:
 
 - [Jackie](https://github.com/lukas2511/jackie) by [lukas2511](https://github.com/lukas2511)
 - [jack_mixer](https://github.com/jack-mixer/jack_mixer)
+
+In addition this project makes use of:
+
+- [Custom Header Bar](https://gist.github.com/KurtJacobson/6b045b6fc38907a2f18c38f6de2929e3) by [Kurt Jacobson](https://gist.github.com/KurtJacobson)
