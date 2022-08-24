@@ -4,8 +4,6 @@ from gi.repository import Gtk
 
 from .device import InputDevice
 
-import app
-
 class DevicesPage(Gtk.Box):
     def __init__(self):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
@@ -29,10 +27,10 @@ class DevicesPage(Gtk.Box):
         input_topbar_grid.add(input_topbar_label)
         input_topbar_grid.attach(input_topbar_add_button,2,0,1,1)
         
-        input_topbar.set_margin_bottom(25)
-        
         input_topbar.add(input_topbar_grid)
         input_devices.add(input_topbar)
+        
+        input_devices.set_margin_bottom(25)
         
         # Setup Output Devices Topbar
         output_topbar = Gtk.Frame()
@@ -51,10 +49,10 @@ class DevicesPage(Gtk.Box):
         output_devices.add(output_topbar)
         
         # Handle audio devices
-        audio_sources = app.audio.manager.get_sources()
-        audio_sinks = app.audio.manager.get_sinks()
+        #audio_sources = app.audio.manager.get_sources()
+        #audio_sinks = app.audio.manager.get_sinks()
         
-        
+        input_devices.add(InputDevice())
         
         self.add(input_devices)
         self.add(output_devices)

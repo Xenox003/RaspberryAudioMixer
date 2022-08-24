@@ -14,6 +14,8 @@ from .channel import Channel
 
 from .pages import DevicesPage
 
+mainWindow = None
+
 class MainWindow(Gtk.Window):
     def __init__(self):
         super().__init__()
@@ -124,6 +126,7 @@ class MainWindow(Gtk.Window):
         
 
 def init():
+    global mainWindow
     
     settings = Gtk.Settings.get_default()
     settings.set_property("gtk-theme-name", "Adwaita-dark")
