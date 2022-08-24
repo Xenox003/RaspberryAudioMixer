@@ -12,6 +12,8 @@ from .meter import StereoMeter
 
 from .channel import Channel
 
+from .pages import DevicesPage
+
 class MainWindow(Gtk.Window):
     def __init__(self):
         super().__init__()
@@ -36,7 +38,9 @@ class MainWindow(Gtk.Window):
         channel3 = Channel(name="Test3",stereo=True)
         mixer_page.add(channel3)
         
-        devices_page = self.add_page("devices","Devices",Gtk.Button(label="Test"))
+        devices_page = self.add_page("devices","Devices",DevicesPage())
+        
+        
         settings_page = self.add_page("settings","System Settings")
         
         # Create box for Custom Header Bar in Fullscreen

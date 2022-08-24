@@ -71,8 +71,8 @@ class AlsaManager():
                             self.inputs.append(AlsaInput(inp[3:] + "_in",inp))
                     
                     
-                    print(input_list)
-                    print(output_list)
+                    #print(input_list)
+                    #print(output_list)
                     
                 except:
                     print("Error handling ALSA")

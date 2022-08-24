@@ -1,4 +1,5 @@
 import gi
+import random
 from gi.repository import Gtk, Gdk
 
 from .meter import StereoMeter
@@ -33,7 +34,7 @@ class Channel(Gtk.Box):
         
         allocation = self.get_size_request()
         meter.set_size_request(allocation.width / 2,allocation.height)
-        meter.set_values(0.5,0.3)
+        meter.set_values(random.randint(50,100)/100,random.randint(50,100)/100)
         
         slider_adjustment = Gtk.Adjustment(0,-60,12,1,10,0)
         slider = Gtk.Scale(orientation=Gtk.Orientation.VERTICAL, adjustment=slider_adjustment, inverted=True)
