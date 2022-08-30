@@ -53,6 +53,7 @@ class DevicesPage(Gtk.Box):
         #audio_sinks = app.audio.manager.get_sinks()
         
         input_devices.add(InputDevice())
+        input_devices.add(InputDevice(stereo=False))
         
         self.add(input_devices)
         self.add(output_devices)
