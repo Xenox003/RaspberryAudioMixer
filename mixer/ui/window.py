@@ -12,7 +12,7 @@ from .meter import StereoMeter
 
 from .channel import Channel
 
-from .pages import DevicesPage
+from .pages import ConfigurePage
 
 mainWindow = None
 
@@ -40,7 +40,7 @@ class MainWindow(Gtk.Window):
         channel3 = Channel(name="Test3",stereo=True)
         mixer_page.add(channel3)
         
-        devices_page = self.add_page("devices","Devices",DevicesPage())
+        devices_page = self.add_page("configure","Configure",ConfigurePage())
         
         
         settings_page = self.add_page("settings","System Settings")
