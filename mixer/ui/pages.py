@@ -3,6 +3,37 @@ import gi
 from gi.repository import Gtk
 
 from .mixer import InputMixer,OutputMixer
+from .channel import Channel
+
+class MixerPage(Gtk.Box):
+    def __init__(self):
+        super().__init__(orientation=Gtk.Orientation.HORIZONTAL)
+        
+        self.input_box = Gtk.HBox()
+        self.output_box = Gtk.VBox()
+        
+        self.input_box.add(Channel(name="eo"))
+        self.input_box.add(Channel(name="eo"))
+        self.input_box.add(Channel(name="eo"))
+        self.input_box.add(Channel(name="eo"))
+        
+        self.input_scroll = Gtk.ScrolledWindow()
+        self.input_scroll.add(self.input_box)
+        self.input_scroll.set_hexpand(True)
+        self.input_scroll.set_vexpand(True)
+        
+        self.output_scroll = Gtk.ScrolledWindow()
+        self.output_scroll.add(self.output_box)
+        self.output_scroll.set_hexpand(True)
+        self.output_scroll.set_vexpand(True)
+        
+        self.input_paned = Gtk.Paned()
+        self.input_paned.add(self.input_scroll)
+        self.output_paned = Gtk.Paned()
+        self.output_paned.add(self.output_scroll)
+        
+        self.add(self.input_paned)
+        self.add(self.output_paned)
 
 class ConfigurePage(Gtk.Box):
     def __init__(self):

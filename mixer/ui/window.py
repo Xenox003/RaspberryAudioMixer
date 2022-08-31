@@ -12,14 +12,14 @@ from .meter import StereoMeter
 
 from .channel import Channel
 
-from .pages import ConfigurePage
+from .pages import ConfigurePage,MixerPage
 
 mainWindow = None
 
 class MainWindow(Gtk.Window):
     def __init__(self):
         super().__init__()
-        self.set_default_size(800,340)
+        self.set_default_size(800,432)
         
         self.page_container = Gtk.Stack()
         self.button_container = Gtk.Box()
@@ -28,18 +28,18 @@ class MainWindow(Gtk.Window):
         self.pages = []
         
         
-        mixer_page = self.add_page("mixer","Mixer")
+        mixer_page = self.add_page("mixer","Mixer",MixerPage())
         #meter1 = StereoMeter()
         #meter1.set_size_request(50,100)
         #GLib.timeout_add(33,test,meter1)
-        
+        """
         channel1 = Channel(name="Test",stereo=True)
         mixer_page.add(channel1)
         channel2 = Channel(name="Test2",stereo=True)
         mixer_page.add(channel2)
         channel3 = Channel(name="Test3",stereo=True)
         mixer_page.add(channel3)
-        
+        """
         devices_page = self.add_page("configure","Configure",ConfigurePage())
         
         
