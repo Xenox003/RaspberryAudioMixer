@@ -27,13 +27,12 @@ class MixerPage(Gtk.Box):
         self.output_scroll.set_hexpand(True)
         self.output_scroll.set_vexpand(True)
         
-        self.input_paned = Gtk.Paned()
-        self.input_paned.add(self.input_scroll)
-        self.output_paned = Gtk.Paned()
-        self.output_paned.add(self.output_scroll)
+        self.main_paned = Gtk.HPaned()
+        self.main_paned.set_wide_handle(True)
+        self.main_paned.add1(self.input_scroll)
+        self.main_paned.add2(self.output_scroll)
         
-        self.add(self.input_paned)
-        self.add(self.output_paned)
+        self.add(self.main_paned)
 
 class ConfigurePage(Gtk.Box):
     def __init__(self):
