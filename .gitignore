@@ -3,3 +3,4 @@ jack_mixer
 jack-volume
 libOSCpp
 __pycache__
+.idea
