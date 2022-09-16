@@ -20,6 +20,10 @@ This configuration is able to handle interfaces like the Behringer UCA 222 or th
 ...
 
 
+## Diagram
+![RaspberryAudioMixerSoftware drawio](https://user-images.githubusercontent.com/68594244/187948941-c31ea6c9-11b6-478f-892b-78d0ab960859.png)
+
+
 ## Utilities
 The system uses some publicly availible software to be able to run correctly:
 
