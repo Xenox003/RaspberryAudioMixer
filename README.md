@@ -2,6 +2,10 @@
 
 Raspberry Audio Mixer is a collection of programs and scripts which turn a Raspberry PI 4 together with some audio interfaces into a audio mixing console
 
+## Disclaimer
+
+This project is neither finished or functional.
+
 ## Software
 The system consists of 3 main parts:
 
